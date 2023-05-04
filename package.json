@@ -24,6 +24,8 @@
     "@nestjs/core": "^9.0.0",
     "@nestjs/mapped-types": "*",
     "@nestjs/platform-express": "^9.0.0",
+    "@types/ali-oss": "^6.16.7",
+    "ali-oss": "^6.17.1",
     "nuid": "^1.1.6",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.2.0"

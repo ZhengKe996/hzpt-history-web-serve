@@ -3,6 +3,7 @@ import { MulterModule } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { OssModule } from './oss/oss.module';
 import * as nuid from 'nuid';
 
 @Module({
@@ -18,6 +19,7 @@ import * as nuid from 'nuid';
         },
       }),
     }),
+    OssModule,
   ],
   controllers: [AppController],
   providers: [AppService],

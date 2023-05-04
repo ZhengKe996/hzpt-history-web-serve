@@ -6,24 +6,29 @@ import {
   UploadedFile,
 } from '@nestjs/common';
 import { AppService } from './app.service';
+import { OssService } from './oss/oss.service';
 import { FileInterceptor } from '@nestjs/platform-express';
-
+import ossConfig from './config';
 @Controller()
 export class AppController {
-  constructor(private readonly appService: AppService) {}
+  constructor(
+    private readonly appService: AppService,
+    private readonly ossService: OssService,
+  ) {}
 
   @Get()
-  getHello(): string {
+  async getHello() {
     return this.appService.getHello();
   }
 
   @Post('api/set/upload-image')
   @UseInterceptors(FileInterceptor('file'))
-  uploadFile(@UploadedFile() file: Express.Multer.File) {
-    console.log('url:', `${file.path}`);
+  async uploadFile(@UploadedFile() file: Express.Multer.File) {
+    const res = await this.ossService.putOssFile(
+      `${ossConfig.url}${file.originalname}`,
+      file.path,
+    );
 
-    return {
-      url: `${file.path}`,
-    };
+    return { res: res.url };
   }
 }
