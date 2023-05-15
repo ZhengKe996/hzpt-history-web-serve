@@ -7,18 +7,17 @@ import {
   Param,
   Delete,
 } from '@nestjs/common';
-import { CategoryService } from './category.service';
-import { CreateCategoryDto } from './dto/create-category.dto';
-import { UpdateCategoryDto } from './dto/update-category.dto';
+import { GradeService } from './grade.service';
+import { CreateGradeDto } from './dto/create-grade.dto';
+import { UpdateGradeDto } from './dto/update-grade.dto';
 
-@Controller('api/get/category')
-export class CategoryController {
-  constructor(private readonly categoryService: CategoryService) {}
+@Controller('api/get/grade')
+export class GradeController {
+  constructor(private readonly gradeService: GradeService) {}
 
   @Post()
-  async create(@Body() createCategoryDto: CreateCategoryDto) {
-    createCategoryDto.col = 1;
-    const res = await this.categoryService.create(createCategoryDto);
+  async create(@Body() createGradeDto: CreateGradeDto) {
+    const res = await this.gradeService.create(createGradeDto);
     if (res.generatedMaps.length > 0)
       return {
         success: true,
@@ -33,11 +32,10 @@ export class CategoryController {
   }
 
   @Post('/all')
-  async createAll(@Body() createCategoryDto: CreateCategoryDto[]) {
+  async createAll(@Body() createGradeDto: CreateGradeDto[]) {
     try {
-      createCategoryDto.forEach(async (item) => {
-        item.col = 1;
-        const { generatedMaps } = await this.categoryService.create(item);
+      createGradeDto.forEach(async (item) => {
+        const { generatedMaps } = await this.gradeService.create(item);
         if (generatedMaps.length <= 0) {
           new Error();
         }
@@ -59,21 +57,20 @@ export class CategoryController {
     return {
       success: true,
       message: 'OK',
-      data: await this.categoryService.findAll(),
+      data: await this.gradeService.findAll(),
     };
   }
 
   @Patch(':id')
   async update(
     @Param('id') id: number,
-    @Body() updateCategoryDto: UpdateCategoryDto,
+    @Body() updateGradeDto: UpdateGradeDto,
   ) {
-    const category = await this.categoryService.findOne(id);
-    if (category == null) {
+    const grade = await this.gradeService.findOne(id);
+    if (grade == null || grade.length <= 0) {
       return { success: false, message: 'Error' };
     }
-
-    const res = await this.categoryService.update(id, updateCategoryDto);
+    const res = await this.gradeService.update(id, updateGradeDto);
     if (res.affected > 0) {
       return {
         success: true,
@@ -84,11 +81,11 @@ export class CategoryController {
 
   @Delete(':id')
   async remove(@Param('id') id: number) {
-    const category = await this.categoryService.findOne(id);
-    if (category == null) {
+    const grade = await this.gradeService.findOne(id);
+    if (grade == null || grade.length <= 0) {
       return { success: false, message: 'Error' };
     }
-    const res = await this.categoryService.remove(id);
+    const res = await this.gradeService.remove(id);
     if (res.affected > 0) {
       return {
         success: true,

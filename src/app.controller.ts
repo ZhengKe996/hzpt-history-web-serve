@@ -20,30 +20,6 @@ export class AppController {
   ) {}
 
   /**
-   * 获取类目
-   * @returns 返回类目结果
-   */
-  @Get('get/grade')
-  async getGrade() {
-    return {
-      success: true,
-      message: 'OK',
-      data: [
-        { grade: '2008' },
-        { grade: '2009' },
-        { grade: '2010' },
-        { grade: '2011' },
-        { grade: '2012' },
-        { grade: '2013' },
-        { grade: '2014' },
-        { grade: '2015' },
-        { grade: '2016' },
-        { grade: '2017' },
-      ],
-    };
-  }
-
-  /**
    * 根据选择类目返回列表
    * @returns 返回图片列表
    */

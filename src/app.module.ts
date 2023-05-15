@@ -7,6 +7,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { OssModule } from './oss/oss.module';
 import { CategoryModule } from './category/category.module';
+import { GradeModule } from './grade/grade.module';
 import * as nuid from 'nuid';
 
 @Module({
@@ -21,7 +22,7 @@ import * as nuid from 'nuid';
       database: Config.db.db_name,
       entities: [__dirname + '/**/*.entity{.ts,.js}'],
       autoLoadEntities: true, // 自动链接被 forFeature 注册的实体
-      synchronize: true, // 实体与表同步 调试模式下开始。不然会有强替换导致数据丢是
+      synchronize: false, // 实体与表同步 调试模式下开始。不然会有强替换导致数据丢是
     }),
 
     MulterModule.register({
@@ -38,6 +39,7 @@ import * as nuid from 'nuid';
     }),
     OssModule,
     CategoryModule,
+    GradeModule,
   ],
   controllers: [AppController],
   providers: [AppService],
