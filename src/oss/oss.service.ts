@@ -1,15 +1,15 @@
 import { Injectable } from '@nestjs/common';
 import * as OSS from 'ali-oss';
-import ossConfig from '../config';
+import { OssConfig } from '../config';
 @Injectable()
 export class OssService {
   private client: any;
   public constructor() {
     this.client = new OSS({
-      accessKeyId: ossConfig.accessKeyId,
-      accessKeySecret: ossConfig.accessKeySecret,
-      region: ossConfig.region,
-      bucket: ossConfig.bucket,
+      accessKeyId: OssConfig.accessKeyId,
+      accessKeySecret: OssConfig.accessKeySecret,
+      region: OssConfig.region,
+      bucket: OssConfig.bucket,
     });
   }
 
