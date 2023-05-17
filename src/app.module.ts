@@ -8,6 +8,7 @@ import { AppService } from './app.service';
 import { OssModule } from './oss/oss.module';
 import { CategoryModule } from './category/category.module';
 import { GradeModule } from './grade/grade.module';
+import { ListModule } from './list/list.module';
 import * as nuid from 'nuid';
 
 @Module({
@@ -40,6 +41,7 @@ import * as nuid from 'nuid';
     OssModule,
     CategoryModule,
     GradeModule,
+    ListModule,
   ],
   controllers: [AppController],
   providers: [AppService],
